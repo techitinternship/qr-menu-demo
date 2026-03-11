@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>QR Menu Demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2>Restaurant QR Menu</h2>
+
+<div class="login">
+<input type="text" id="name" placeholder="Enter Name">
+<input type="text" id="mobile" placeholder="Enter Mobile Number">
+</div>
+
+<h3>Menu</h3>
+
+<div class="item">
+<h4>Veg Burger - ₹120</h4>
+<button onclick="addItem('Veg Burger',120)">Add</button>
+</div>
+
+<div class="item">
+<h4>Pizza - ₹250</h4>
+<button onclick="addItem('Pizza',250)">Add</button>
+</div>
+
+<div class="item">
+<h4>Cold Coffee - ₹80</h4>
+<button onclick="addItem('Cold Coffee',80)">Add</button>
+</div>
+
+<h3 id="cart">Cart Empty</h3>
+
+<button class="order-btn" onclick="sendOrder()">Place Order</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
