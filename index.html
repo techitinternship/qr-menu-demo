@@ -1,54 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>QR Menu</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant QR Menu</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:#f5f6fa;
+}
+
+.header{
+background:#ff5a3c;
+color:white;
+padding:20px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:20px;
+}
+
+.login{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+margin-bottom:20px;
+}
+
+.login input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.menu-title{
+margin:15px 0;
+font-size:20px;
+font-weight:bold;
+}
+
+.menu-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.item-info{
+font-size:16px;
+}
+
+.price{
+color:#777;
+font-size:14px;
+}
+
+.add-btn{
+background:#ff5a3c;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.add-btn:hover{
+background:#e64a2e;
+}
+
+.cart{
+background:white;
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.order-btn{
+width:100%;
+background:#27ae60;
+color:white;
+border:none;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+.order-btn:hover{
+background:#219150;
+}
+
+</style>
+
 </head>
 
 <body>
 
+<div class="header">
+🍽 Restaurant Menu
+</div>
+
 <div class="container">
 
-<h1>🍽 Restaurant Menu</h1>
-
-<div class="login-box">
-<input type="text" id="name" placeholder="Enter Your Name">
-<input type="text" id="mobile" placeholder="Enter Mobile Number">
+<div class="login">
+<input type="text" id="name" placeholder="Enter your name">
+<input type="text" id="mobile" placeholder="Enter mobile number">
 </div>
 
-<h2>Menu</h2>
+<div class="menu-title">Menu</div>
 
-<div class="menu">
-
-<div class="card">
-<h3>🍔 Veg Burger</h3>
-<p>Price: ₹120</p>
-<button onclick="addItem('Veg Burger',120)">Add to Cart</button>
+<div class="menu-item">
+<div class="item-info">
+🍔 Veg Burger
+<div class="price">₹120</div>
+</div>
+<button class="add-btn" onclick="addItem('Veg Burger',120)">Add</button>
 </div>
 
-<div class="card">
-<h3>🍕 Pizza</h3>
-<p>Price: ₹250</p>
-<button onclick="addItem('Pizza',250)">Add to Cart</button>
+<div class="menu-item">
+<div class="item-info">
+🍕 Pizza
+<div class="price">₹250</div>
+</div>
+<button class="add-btn" onclick="addItem('Pizza',250)">Add</button>
 </div>
 
-<div class="card">
-<h3>🥤 Cold Coffee</h3>
-<p>Price: ₹80</p>
-<button onclick="addItem('Cold Coffee',80)">Add to Cart</button>
+<div class="menu-item">
+<div class="item-info">
+🥤 Cold Coffee
+<div class="price">₹80</div>
+</div>
+<button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button>
 </div>
 
-</div>
-
-<div class="cart-box">
-<h3 id="cart">🛒 Cart Empty</h3>
+<div class="cart">
+<h3 id="cart">Cart Empty</h3>
 <button class="order-btn" onclick="sendOrder()">Place Order</button>
 </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+
+let cart=[];
+
+function addItem(name,price){
+
+cart.push(name+" ₹"+price);
+
+document.getElementById("cart").innerHTML="🛒 "+cart.join(", ");
+
+}
+
+function sendOrder(){
+
+let name=document.getElementById("name").value;
+let mobile=document.getElementById("mobile").value;
+
+let msg="New Order%0A";
+msg+="Customer: "+name+"%0A";
+msg+="Mobile: "+mobile+"%0A";
+msg+="Items: "+cart.join(", ");
+
+let url="https://wa.me/919999999999?text="+msg;
+
+window.open(url);
+
+}
+
+</script>
 
 </body>
 </html>
