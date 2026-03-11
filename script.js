@@ -18,8 +18,9 @@ message+="Customer: "+name+"%0A";
 message+="Mobile: "+mobile+"%0A";
 message+="Items: "+cart.join(", ");
 
-let whatsapp="https://wa.me/919999999999?text="+message;
+let whatsapp="https://wa.me/919082369588?text="+message;
 
 window.open(whatsapp);
+
 
 }
