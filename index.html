@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant QR Menu</title>
+
+<title>QR Menu</title>
 
 <style>
 
@@ -11,51 +12,62 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family: 'Segoe UI', sans-serif;
 }
 
 body{
-background:#f5f6fa;
+background:#f5f5f5;
 }
+
+/* Header */
 
 .header{
-background:#ff5a3c;
+background:#fc8019;
 color:white;
-padding:20px;
+padding:16px;
+font-size:20px;
+font-weight:600;
 text-align:center;
-font-size:22px;
-font-weight:bold;
 }
+
+/* Container */
 
 .container{
-max-width:500px;
+max-width:480px;
 margin:auto;
-padding:20px;
+padding:15px;
 }
 
-.login{
+/* Restaurant Select */
+
+.restaurant-select{
 background:white;
 padding:15px;
 border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-margin-bottom:20px;
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
+margin-bottom:15px;
 }
 
-.login input{
+.restaurant-select select,
+.restaurant-select input{
 width:100%;
 padding:10px;
 margin-top:10px;
-border:1px solid #ddd;
 border-radius:6px;
+border:1px solid #ddd;
 }
+
+/* Menu title */
 
 .menu-title{
+font-size:18px;
+font-weight:600;
 margin:15px 0;
-font-size:20px;
-font-weight:bold;
 }
 
-.menu-item{
+/* Menu Card */
+
+.menu-card{
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -66,34 +78,39 @@ border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,0.08);
 }
 
-.item-info{
+.menu-info{
+display:flex;
+flex-direction:column;
+}
+
+.menu-name{
+font-weight:600;
 font-size:16px;
 }
 
-.price{
+.menu-price{
 color:#777;
 font-size:14px;
+margin-top:3px;
 }
 
 .add-btn{
-background:#ff5a3c;
+background:#fc8019;
 color:white;
 border:none;
-padding:8px 14px;
+padding:7px 14px;
 border-radius:6px;
 cursor:pointer;
 }
 
-.add-btn:hover{
-background:#e64a2e;
-}
+/* Cart */
 
 .cart{
 background:white;
-margin-top:20px;
 padding:15px;
+margin-top:15px;
 border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
 }
 
 .order-btn{
@@ -102,14 +119,10 @@ background:#27ae60;
 color:white;
 border:none;
 padding:12px;
-margin-top:10px;
 border-radius:6px;
+margin-top:10px;
 font-size:16px;
 cursor:pointer;
-}
-
-.order-btn:hover{
-background:#219150;
 }
 
 </style>
@@ -119,38 +132,46 @@ background:#219150;
 <body>
 
 <div class="header">
-🍽 Restaurant Menu
+🍽 QR Restaurant Menu
 </div>
 
 <div class="container">
 
-<div class="login">
+<div class="restaurant-select">
+
+<select id="restaurant">
+<option value="">Select Restaurant</option>
+<option value="r1">Spice Garden</option>
+<option value="r2">Food Hub</option>
+</select>
+
 <input type="text" id="name" placeholder="Enter your name">
 <input type="text" id="mobile" placeholder="Enter mobile number">
+
 </div>
 
 <div class="menu-title">Menu</div>
 
-<div class="menu-item">
-<div class="item-info">
-🍔 Veg Burger
-<div class="price">₹120</div>
+<div class="menu-card">
+<div class="menu-info">
+<div class="menu-name">Veg Burger</div>
+<div class="menu-price">₹120</div>
 </div>
 <button class="add-btn" onclick="addItem('Veg Burger',120)">Add</button>
 </div>
 
-<div class="menu-item">
-<div class="item-info">
-🍕 Pizza
-<div class="price">₹250</div>
+<div class="menu-card">
+<div class="menu-info">
+<div class="menu-name">Pizza</div>
+<div class="menu-price">₹250</div>
 </div>
 <button class="add-btn" onclick="addItem('Pizza',250)">Add</button>
 </div>
 
-<div class="menu-item">
-<div class="item-info">
-🥤 Cold Coffee
-<div class="price">₹80</div>
+<div class="menu-card">
+<div class="menu-info">
+<div class="menu-name">Cold Coffee</div>
+<div class="menu-price">₹80</div>
 </div>
 <button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button>
 </div>
@@ -176,15 +197,27 @@ document.getElementById("cart").innerHTML="🛒 "+cart.join(", ");
 
 function sendOrder(){
 
+let restaurant=document.getElementById("restaurant").value;
 let name=document.getElementById("name").value;
 let mobile=document.getElementById("mobile").value;
 
+let phone="";
+
+if(restaurant=="r1"){
+phone="919876543210";
+}
+
+if(restaurant=="r2"){
+phone="919123456789";
+}
+
 let msg="New Order%0A";
+msg+="Restaurant: "+restaurant+"%0A";
 msg+="Customer: "+name+"%0A";
 msg+="Mobile: "+mobile+"%0A";
 msg+="Items: "+cart.join(", ");
 
-let url="https://wa.me/919082369588?text="+msg;
+let url="https://wa.me/"+phone+"?text="+msg;
 
 window.open(url);
 
@@ -194,4 +227,3 @@ window.open(url);
 
 </body>
 </html>
-
