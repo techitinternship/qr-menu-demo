@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>QR Menu</title>
+<title>QR Menu Demo</title>
 
 <style>
 
@@ -36,16 +37,16 @@ font-weight:bold;
 max-width:480px;
 margin:auto;
 padding:15px;
-padding-bottom:120px;
+padding-bottom:160px;
 }
 
-/* Customer box */
+/* Inputs */
 
 .customer-box{
 background:white;
 padding:12px;
 border-radius:8px;
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
 .customer-box input{
@@ -56,14 +57,39 @@ border:1px solid #ddd;
 border-radius:6px;
 }
 
-/* Menu */
+/* Search */
 
-.menu-title{
-font-size:18px;
+.search-box input{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+/* Categories */
+
+.categories{
+display:flex;
+gap:8px;
+overflow-x:auto;
 margin-bottom:10px;
 }
 
-/* Menu Item */
+.cat-btn{
+padding:6px 10px;
+border:none;
+background:#eee;
+border-radius:20px;
+cursor:pointer;
+}
+
+.cat-btn.active{
+background:#fc8019;
+color:white;
+}
+
+/* Menu item */
 
 .menu-item{
 display:flex;
@@ -90,31 +116,34 @@ flex:1;
 color:#777;
 }
 
-.add-btn{
+/* Quantity */
+
+.qty-box{
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.qty-btn{
 background:#fc8019;
 color:white;
 border:none;
-padding:6px 12px;
-border-radius:5px;
+padding:4px 8px;
+border-radius:4px;
 }
 
-/* Cart */
+/* Floating cart */
 
-.cart{
-background:white;
-padding:15px;
-border-radius:8px;
-margin-top:10px;
-}
-
-.order-btn{
-width:100%;
+.cart-float{
+position:fixed;
+bottom:70px;
+right:15px;
 background:#27ae60;
 color:white;
-border:none;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
+padding:12px 14px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
 /* Footer */
@@ -125,7 +154,6 @@ bottom:0;
 width:100%;
 background:black;
 color:white;
-box-shadow:0 -2px 10px rgba(0,0,0,0.3);
 padding:12px;
 display:flex;
 justify-content:space-between;
@@ -170,24 +198,13 @@ border:1px solid #ddd;
 border-radius:6px;
 }
 
-.close-btn{
-background:red;
-color:white;
-border:none;
-padding:6px 10px;
-margin-top:10px;
-border-radius:5px;
-}
-
 </style>
 
 </head>
 
 <body>
 
-<div class="header">
-🍽 Demo Restaurant Menu
-</div>
+<div class="header">🍽 Demo Restaurant Menu</div>
 
 <div class="container">
 
@@ -196,138 +213,185 @@ border-radius:5px;
 <input type="text" id="mobile" placeholder="Enter Mobile">
 </div>
 
-<div class="menu-title">Menu</div>
-
-<!-- Products -->
-
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1550547660-d9450f859349" class="food-img">
-<div class="food-info">Burger<div class="price">₹120</div></div>
-<button class="add-btn" onclick="addItem('Burger',120)">Add</button>
+<div class="search-box">
+<input type="text" placeholder="Search food..." onkeyup="searchFood(this.value)">
 </div>
 
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e" class="food-img">
-<div class="food-info">Pizza<div class="price">₹250</div></div>
-<button class="add-btn" onclick="addItem('Pizza',250)">Add</button>
+<div class="categories">
+<button class="cat-btn active" onclick="filterCat('all')">All</button>
+<button class="cat-btn" onclick="filterCat('burger')">Burger</button>
+<button class="cat-btn" onclick="filterCat('pizza')">Pizza</button>
+<button class="cat-btn" onclick="filterCat('drink')">Drinks</button>
 </div>
 
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1517705008128-361805f42e86" class="food-img">
-<div class="food-info">Cold Coffee<div class="price">₹80</div></div>
-<button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button>
-</div>
+<div id="menu">
 
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" class="food-img">
-<div class="food-info">Sandwich<div class="price">₹90</div></div>
-<button class="add-btn" onclick="addItem('Sandwich',90)">Add</button>
-</div>
-
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1523987355523-c7b5b84a9a4b" class="food-img">
-<div class="food-info">Pasta<div class="price">₹180</div></div>
-<button class="add-btn" onclick="addItem('Pasta',180)">Add</button>
-</div>
-
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add" class="food-img">
-<div class="food-info">French Fries<div class="price">₹100</div></div>
-<button class="add-btn" onclick="addItem('Fries',100)">Add</button>
-</div>
-
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246" class="food-img">
-<div class="food-info">Noodles<div class="price">₹150</div></div>
-<button class="add-btn" onclick="addItem('Noodles',150)">Add</button>
-</div>
-
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950" class="food-img">
-<div class="food-info">Paneer Roll<div class="price">₹140</div></div>
-<button class="add-btn" onclick="addItem('Paneer Roll',140)">Add</button>
-</div>
-
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb" class="food-img">
-<div class="food-info">Ice Cream<div class="price">₹70</div></div>
-<button class="add-btn" onclick="addItem('Ice Cream',70)">Add</button>
-</div>
-
-<div class="menu-item">
-<img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87" class="food-img">
-<div class="food-info">Mojito<div class="price">₹110</div></div>
-<button class="add-btn" onclick="addItem('Mojito',110)">Add</button>
-</div>
-
-<div class="cart">
-<h3 id="cart">Cart Empty</h3>
-<button class="order-btn" onclick="sendOrder()">Place Order</button>
 </div>
 
 </div>
 
-<!-- Footer -->
+<div class="cart-float" onclick="sendOrder()">
+🛒 ₹<span id="total">0</span>
+</div>
 
 <div class="footer-offer">
 <div>🔥 One Time Offer - 20% OFF</div>
 <button class="register-btn" onclick="openPopup()">Register</button>
 </div>
 
-<!-- Popup -->
-
 <div class="popup" id="popup">
-
 <div class="popup-content">
-
 <h3>Register</h3>
-
 <input type="text" placeholder="Name">
 <input type="text" placeholder="Mobile">
-
-<button class="order-btn" onclick="register()">Submit</button>
-<button class="close-btn" onclick="closePopup()">Close</button>
-
+<button onclick="register()">Submit</button>
 </div>
-
 </div>
 
 <script>
 
-let cart=[];
+let products=[
 
-function addItem(name,price){
-cart.push(name+" ₹"+price);
-document.getElementById("cart").innerHTML="🛒 "+cart.join(", ");
+{name:"Burger",price:120,cat:"burger",img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd"},
+{name:"Cheese Burger",price:150,cat:"burger",img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
+{name:"Pizza",price:250,cat:"pizza",img:"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e"},
+{name:"Veg Pizza",price:220,cat:"pizza",img:"https://images.unsplash.com/photo-1513104890138-7c749659a591"},
+{name:"Cold Coffee",price:80,cat:"drink",img:"https://images.unsplash.com/photo-1517705008128-361805f42e86"},
+{name:"Mojito",price:110,cat:"drink",img:"https://images.unsplash.com/photo-1551024709-8f23befc6f87"}
+
+];
+
+let cart={};
+
+function renderMenu(list){
+
+let html="";
+
+list.forEach(p=>{
+
+let qty=cart[p.name]||0;
+
+html+=`
+
+<div class="menu-item">
+
+<img src="${p.img}" class="food-img">
+
+<div class="food-info">
+${p.name}
+<div class="price">₹${p.price}</div>
+</div>
+
+<div class="qty-box">
+
+<button class="qty-btn" onclick="updateQty('${p.name}',-1)">-</button>
+
+<span>${qty}</span>
+
+<button class="qty-btn" onclick="updateQty('${p.name}',1)">+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("menu").innerHTML=html;
+
+}
+
+renderMenu(products);
+
+function updateQty(name,change){
+
+cart[name]=(cart[name]||0)+change;
+
+if(cart[name]<0) cart[name]=0;
+
+updateTotal();
+
+renderMenu(products);
+
+}
+
+function updateTotal(){
+
+let total=0;
+
+products.forEach(p=>{
+
+if(cart[p.name]){
+
+total+=p.price*cart[p.name];
+
+}
+
+});
+
+document.getElementById("total").innerText=total;
+
+}
+
+function searchFood(q){
+
+let res=products.filter(p=>p.name.toLowerCase().includes(q.toLowerCase()));
+
+renderMenu(res);
+
+}
+
+function filterCat(cat){
+
+if(cat=="all"){
+
+renderMenu(products);
+
+}else{
+
+renderMenu(products.filter(p=>p.cat==cat));
+
+}
+
 }
 
 function sendOrder(){
 
 let name=document.getElementById("name").value;
+
 let mobile=document.getElementById("mobile").value;
 
-let msg="New Order%0A";
-msg+="Customer: "+name+"%0A";
-msg+="Mobile: "+mobile+"%0A";
-msg+="Items: "+cart.join(", ");
+let items="";
 
-let url="https://wa.me/919999999999?text="+msg;
+for(let k in cart){
+
+if(cart[k]>0){
+
+items+=k+" x"+cart[k]+"%0A";
+
+}
+
+}
+
+let url="https://wa.me/919999999999?text=Order%0ACustomer:"+name+"%0AMobile:"+mobile+"%0AItems:%0A"+items;
 
 window.open(url);
 
 }
 
 function openPopup(){
-document.getElementById("popup").style.display="flex";
-}
 
-function closePopup(){
-document.getElementById("popup").style.display="none";
+document.getElementById("popup").style.display="flex";
+
 }
 
 function register(){
-alert("Registration Successful!");
-closePopup();
+
+alert("Registration Successful");
+
+document.getElementById("popup").style.display="none";
+
 }
 
 </script>
