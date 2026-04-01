@@ -1,240 +1,42 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Ordering System</title>
-
-<style>
-body{font-family:Arial;margin:0;background:#f5f5f5}
-.header{background:#fc8019;color:white;padding:15px;text-align:center;font-size:18px}
-.container{padding:15px}
-.card{background:white;padding:15px;margin:10px 0;border-radius:8px;text-align:center}
-button{padding:10px 15px;border:none;border-radius:6px;background:#fc8019;color:white}
-input{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:6px}
-
-/* hide sections */
-.section{display:none}
-.active{display:block}
-
-/* menu */
-.menu-item{display:flex;justify-content:space-between;background:white;margin:10px 0;padding:10px;border-radius:8px}
-.cart-bar{position:fixed;bottom:0;width:100%;background:white;padding:10px;display:flex;justify-content:space-between}
-</style>
-
+<meta charset="UTF-8">
+<title>QR Menu Demo</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="header">QR Ordering System</div>
+<h2>Restaurant QR Menu</h2>
 
-<!-- MODE SELECTION -->
-
-<div class="container section active" id="home">
-<div class="card">
-<h3>Select Mode</h3>
-<button onclick="show('takeaway')">Take Away</button>
-<button onclick="show('dinein')">Dine In</button>
-</div>
+<div class="login">
+<input type="text" id="name" placeholder="Enter Name">
+<input type="text" id="mobile" placeholder="Enter Mobile Number">
 </div>
 
-<!-- TAKEAWAY OTP -->
+<h3>Menu</h3>
 
-<div class="container section" id="takeaway">
-<h3>Enter Mobile</h3>
-<input id="mobile" placeholder="Mobile Number">
-<button onclick="sendOTP()">Send OTP</button>
-
-<div id="otpBox" style="display:none">
-<input id="otp" placeholder="Enter OTP">
-<button onclick="verifyOTP()">Verify</button>
-</div>
+<div class="item">
+<h4>Veg Burger - ₹120</h4>
+<button onclick="addItem('Veg Burger',120)">Add</button>
 </div>
 
-<!-- RESTAURANT LIST -->
-
-<div class="container section" id="restaurants">
-<h3>Select Restaurant</h3>
-
-<div class="card" onclick="selectHotel('Hotel A')">Hotel A</div>
-<div class="card" onclick="selectHotel('Hotel B')">Hotel B</div>
-
+<div class="item">
+<h4>Pizza - ₹250</h4>
+<button onclick="addItem('Pizza',250)">Add</button>
 </div>
 
-<!-- MENU -->
-
-<div class="container section" id="menu">
-
-<h3 id="hotelName"></h3>
-
-<div id="menuList"></div>
-
+<div class="item">
+<h4>Cold Coffee - ₹80</h4>
+<button onclick="addItem('Cold Coffee',80)">Add</button>
 </div>
 
-<!-- DINE IN FORM -->
+<h3 id="cart">Cart Empty</h3>
 
-<div class="container section" id="dinein">
+<button class="order-btn" onclick="sendOrder()">Place Order</button>
 
-<h3>Dine In Form</h3>
-
-<input id="d_name" placeholder="Name">
-<input id="d_mobile" placeholder="Mobile">
-<input id="d_address" placeholder="Address">
-<input id="d_table" placeholder="Table No (T1)">
-
-<button onclick="startDineIn()">Continue</button>
-
-</div>
-
-<!-- CART -->
-
-<div class="cart-bar" id="cartBar" style="display:none">
-<div>Total ₹<span id="total">0</span></div>
-<button onclick="placeOrder()">Place Order</button>
-</div>
-
-<script>
-
-let cart={}
-let selectedHotel=""
-let mode=""
-
-/* NAVIGATION */
-
-function show(id){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"))
-document.getElementById(id).classList.add("active")
-}
-
-/* OTP FLOW */
-
-function sendOTP(){
-document.getElementById("otpBox").style.display="block"
-alert("OTP Sent (Demo: 1234)")
-}
-
-function verifyOTP(){
-let otp=document.getElementById("otp").value
-if(otp=="1234"){
-mode="takeaway"
-show("restaurants")
-}else{
-alert("Wrong OTP")
-}
-}
-
-/* SELECT HOTEL */
-
-function selectHotel(name){
-selectedHotel=name
-document.getElementById("hotelName").innerText=name
-show("menu")
-loadMenu()
-}
-
-/* MENU */
-
-let products=[
-{name:"Burger",price:120},
-{name:"Pizza",price:250},
-{name:"Coffee",price:80}
-]
-
-function loadMenu(){
-
-let html=""
-
-products.forEach(p=>{
-
-let qty=cart[p.name]||0
-
-html+=`
-<div class="menu-item">
-<div>${p.name} ₹${p.price}</div>
-
-<div>
-<button onclick="update('${p.name}',-1)">-</button>
-${qty}
-<button onclick="update('${p.name}',1)">+</button>
-</div>
-
-</div>
-`
-
-})
-
-document.getElementById("menuList").innerHTML=html
-document.getElementById("cartBar").style.display="flex"
-
-}
-
-/* CART */
-
-function update(name,val){
-cart[name]=(cart[name]||0)+val
-if(cart[name]<0) cart[name]=0
-loadMenu()
-updateTotal()
-}
-
-function updateTotal(){
-let total=0
-products.forEach(p=>{
-if(cart[p.name]){
-total+=p.price*cart[p.name]
-}
-})
-document.getElementById("total").innerText=total
-}
-
-/* DINE IN */
-
-function startDineIn(){
-
-mode="dinein"
-
-let table=document.getElementById("d_table").value
-
-if(!table){
-alert("Enter table number")
-return
-}
-
-selectHotel("Dine-In Restaurant")
-
-}
-
-/* ORDER */
-
-function placeOrder(){
-
-let items=""
-
-for(let k in cart){
-if(cart[k]>0){
-items+=k+" x"+cart[k]+"%0A"
-}
-}
-
-let msg="New Order%0A"
-
-if(mode=="takeaway"){
-msg+="Mode: Takeaway%0A🎁 Free Water Bottle%0A"
-}else{
-msg+="Mode: Dine-In%0A🎁 Free Dish + Water Bottle%0A"
-msg+="Table: "+document.getElementById("d_table").value+"%0A"
-}
-
-msg+="Hotel: "+selectedHotel+"%0A"
-msg+="Items:%0A"+items
-
-let url="https://wa.me/919999999999?text="+msg
-
-window.open(url)
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
