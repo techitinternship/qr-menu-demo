@@ -1,291 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="menu-item">
 
-<title>QR Menu</title>
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349" class="food-img">
 
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
-body{
-background:#f5f5f5;
-}
-
-/* Header */
-
-.header{
-background:#fc8019;
-color:white;
-padding:16px;
-text-align:center;
-font-size:20px;
-font-weight:bold;
-}
-
-/* Container */
-
-.container{
-max-width:480px;
-margin:auto;
-padding:15px;
-padding-bottom:120px;
-}
-
-/* Customer input */
-
-.customer-box{
-background:white;
-padding:12px;
-border-radius:8px;
-margin-bottom:15px;
-}
-
-.customer-box input{
-width:100%;
-padding:10px;
-margin-top:8px;
-border:1px solid #ddd;
-border-radius:6px;
-}
-
-/* Menu */
-
-.menu-title{
-font-size:18px;
-margin-bottom:10px;
-}
-
-.menu-item{
-display:flex;
-justify-content:space-between;
-background:white;
-padding:14px;
-margin-bottom:10px;
-border-radius:8px;
-}
-
-.price{
-color:#777;
-}
-
-.add-btn{
-background:#fc8019;
-color:white;
-border:none;
-padding:6px 12px;
-border-radius:5px;
-}
-
-/* Cart */
-
-.cart{
-background:white;
-padding:15px;
-border-radius:8px;
-margin-top:10px;
-}
-
-.order-btn{
-width:100%;
-background:#27ae60;
-color:white;
-border:none;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-}
-
-/* Fixed footer */
-
-.footer-offer{
-position:fixed;
-bottom:0;
-width:100%;
-background:white;
-box-shadow:0 -2px 10px rgba(0,0,0,0.15);
-padding:10px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.register-btn{
-background:#fc8019;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:6px;
-}
-
-/* Popup */
-
-.popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-display:none;
-justify-content:center;
-align-items:center;
-}
-
-.popup-content{
-background:white;
-padding:20px;
-width:90%;
-max-width:350px;
-border-radius:8px;
-}
-
-.popup-content input{
-width:100%;
-padding:10px;
-margin-top:10px;
-border:1px solid #ddd;
-border-radius:6px;
-}
-
-.close-btn{
-background:red;
-color:white;
-border:none;
-padding:6px 10px;
-margin-top:10px;
-border-radius:5px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="header">
-🍽 Demo Restaurant Menu
+<div class="food-info">
+Burger
+<div class="price">₹120</div>
 </div>
 
-<div class="container">
-
-<div class="customer-box">
-
-<input type="text" id="name" placeholder="Enter Name">
-<input type="text" id="mobile" placeholder="Enter Mobile">
+<button class="add-btn" onclick="addItem('Burger',120)">Add</button>
 
 </div>
 
-<div class="menu-title">Menu</div>
 
-<!-- 10 Products -->
+<div class="menu-item">
 
-<div class="menu-item"><div>Burger <div class="price">₹120</div></div><button class="add-btn" onclick="addItem('Burger',120)">Add</button></div>
+<img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e" class="food-img">
 
-<div class="menu-item"><div>Pizza <div class="price">₹250</div></div><button class="add-btn" onclick="addItem('Pizza',250)">Add</button></div>
-
-<div class="menu-item"><div>Cold Coffee <div class="price">₹80</div></div><button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button></div>
-
-<div class="menu-item"><div>Sandwich <div class="price">₹90</div></div><button class="add-btn" onclick="addItem('Sandwich',90)">Add</button></div>
-
-<div class="menu-item"><div>Pasta <div class="price">₹180</div></div><button class="add-btn" onclick="addItem('Pasta',180)">Add</button></div>
-
-<div class="menu-item"><div>French Fries <div class="price">₹100</div></div><button class="add-btn" onclick="addItem('Fries',100)">Add</button></div>
-
-<div class="menu-item"><div>Noodles <div class="price">₹150</div></div><button class="add-btn" onclick="addItem('Noodles',150)">Add</button></div>
-
-<div class="menu-item"><div>Paneer Roll <div class="price">₹140</div></div><button class="add-btn" onclick="addItem('Paneer Roll',140)">Add</button></div>
-
-<div class="menu-item"><div>Ice Cream <div class="price">₹70</div></div><button class="add-btn" onclick="addItem('Ice Cream',70)">Add</button></div>
-
-<div class="menu-item"><div>Mojito <div class="price">₹110</div></div><button class="add-btn" onclick="addItem('Mojito',110)">Add</button></div>
-
-<div class="cart">
-<h3 id="cart">Cart Empty</h3>
-<button class="order-btn" onclick="sendOrder()">Place Order</button>
+<div class="food-info">
+Pizza
+<div class="price">₹250</div>
 </div>
+
+<button class="add-btn" onclick="addItem('Pizza',250)">Add</button>
 
 </div>
 
-<!-- Footer Offer -->
 
-<div class="footer-offer">
-<div>🔥 One Time Offer - 20% OFF</div>
-<button class="register-btn" onclick="openPopup()">Register</button>
+<div class="menu-item">
+
+<img src="https://images.unsplash.com/photo-1517705008128-361805f42e86" class="food-img">
+
+<div class="food-info">
+Cold Coffee
+<div class="price">₹80</div>
 </div>
 
-<!-- Popup Form -->
-
-<div class="popup" id="popup">
-
-<div class="popup-content">
-
-<h3>Register</h3>
-
-<input type="text" placeholder="Name">
-<input type="text" placeholder="Mobile">
-
-<button class="order-btn" onclick="register()">Submit</button>
-<button class="close-btn" onclick="closePopup()">Close</button>
+<button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button>
 
 </div>
 
+
+<div class="menu-item">
+
+<img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" class="food-img">
+
+<div class="food-info">
+Sandwich
+<div class="price">₹90</div>
 </div>
 
-<script>
+<button class="add-btn" onclick="addItem('Sandwich',90)">Add</button>
 
-let cart=[];
+</div>
 
-function addItem(name,price){
 
-cart.push(name+" ₹"+price);
+<div class="menu-item">
 
-document.getElementById("cart").innerHTML="🛒 "+cart.join(", ");
+<img src="https://images.unsplash.com/photo-1523987355523-c7b5b84a9a4b" class="food-img">
 
-}
+<div class="food-info">
+Pasta
+<div class="price">₹180</div>
+</div>
 
-function sendOrder(){
+<button class="add-btn" onclick="addItem('Pasta',180)">Add</button>
 
-let name=document.getElementById("name").value;
-let mobile=document.getElementById("mobile").value;
+</div>
 
-let msg="New Order%0A";
-msg+="Customer: "+name+"%0A";
-msg+="Mobile: "+mobile+"%0A";
-msg+="Items: "+cart.join(", ");
 
-let url="https://wa.me/919999999999?text="+msg;
+<div class="menu-item">
 
-window.open(url);
+<img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add" class="food-img">
 
-}
+<div class="food-info">
+French Fries
+<div class="price">₹100</div>
+</div>
 
-/* Popup */
+<button class="add-btn" onclick="addItem('Fries',100)">Add</button>
 
-function openPopup(){
-document.getElementById("popup").style.display="flex";
-}
+</div>
 
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
 
-function register(){
+<div class="menu-item">
 
-alert("Registration Successful!");
+<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246" class="food-img">
 
-closePopup();
+<div class="food-info">
+Noodles
+<div class="price">₹150</div>
+</div>
 
-}
+<button class="add-btn" onclick="addItem('Noodles',150)">Add</button>
 
-</script>
+</div>
 
-</body>
-</html>
+
+<div class="menu-item">
+
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950" class="food-img">
+
+<div class="food-info">
+Paneer Roll
+<div class="price">₹140</div>
+</div>
+
+<button class="add-btn" onclick="addItem('Paneer Roll',140)">Add</button>
+
+</div>
+
+
+<div class="menu-item">
+
+<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb" class="food-img">
+
+<div class="food-info">
+Ice Cream
+<div class="price">₹70</div>
+</div>
+
+<button class="add-btn" onclick="addItem('Ice Cream',70)">Add</button>
+
+</div>
+
+
+<div class="menu-item">
+
+<img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87" class="food-img">
+
+<div class="food-info">
+Mojito
+<div class="price">₹110</div>
+</div>
+
+<button class="add-btn" onclick="addItem('Mojito',110)">Add</button>
+
+</div>
