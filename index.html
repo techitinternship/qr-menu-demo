@@ -12,103 +12,85 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: 'Segoe UI', sans-serif;
+font-family:Arial;
 }
 
 body{
-background:#f4f6f9;
+background:#f5f5f5;
 }
 
 /* Header */
 
 .header{
-background:#ff5a3c;
+background:#fc8019;
 color:white;
-padding:18px;
+padding:16px;
 text-align:center;
 font-size:20px;
-font-weight:600;
+font-weight:bold;
 }
 
 /* Container */
 
 .container{
-max-width:500px;
+max-width:480px;
 margin:auto;
 padding:15px;
+padding-bottom:120px;
 }
 
-/* Customer info */
+/* Customer input */
 
 .customer-box{
 background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-margin-bottom:20px;
+padding:12px;
+border-radius:8px;
+margin-bottom:15px;
 }
 
 .customer-box input{
 width:100%;
 padding:10px;
-margin-top:10px;
+margin-top:8px;
 border:1px solid #ddd;
 border-radius:6px;
 }
 
-/* Menu title */
+/* Menu */
 
 .menu-title{
 font-size:18px;
-font-weight:600;
 margin-bottom:10px;
 }
-
-/* Menu items */
 
 .menu-item{
 display:flex;
 justify-content:space-between;
-align-items:center;
 background:white;
-padding:15px;
+padding:14px;
 margin-bottom:10px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-.item-name{
-font-size:16px;
+border-radius:8px;
 }
 
 .price{
 color:#777;
-font-size:14px;
 }
-
-/* Buttons */
 
 .add-btn{
-background:#ff5a3c;
+background:#fc8019;
 color:white;
 border:none;
-padding:7px 14px;
+padding:6px 12px;
 border-radius:5px;
-cursor:pointer;
-}
-
-.add-btn:hover{
-background:#e64a2e;
 }
 
 /* Cart */
 
 .cart{
-margin-top:20px;
 background:white;
 padding:15px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
+border-radius:8px;
+margin-top:10px;
 }
 
 .order-btn{
@@ -119,12 +101,67 @@ border:none;
 padding:12px;
 margin-top:10px;
 border-radius:6px;
-font-size:16px;
-cursor:pointer;
 }
 
-.order-btn:hover{
-background:#219150;
+/* Fixed footer */
+
+.footer-offer{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+box-shadow:0 -2px 10px rgba(0,0,0,0.15);
+padding:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.register-btn{
+background:#fc8019;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:6px;
+}
+
+/* Popup */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+.popup-content{
+background:white;
+padding:20px;
+width:90%;
+max-width:350px;
+border-radius:8px;
+}
+
+.popup-content input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.close-btn{
+background:red;
+color:white;
+border:none;
+padding:6px 10px;
+margin-top:10px;
+border-radius:5px;
 }
 
 </style>
@@ -134,48 +171,69 @@ background:#219150;
 <body>
 
 <div class="header">
-🍽 Restaurant Menu
+🍽 Demo Restaurant Menu
 </div>
 
 <div class="container">
 
 <div class="customer-box">
 
-<input type="text" id="name" placeholder="Enter Your Name">
-<input type="text" id="mobile" placeholder="Enter Mobile Number">
+<input type="text" id="name" placeholder="Enter Name">
+<input type="text" id="mobile" placeholder="Enter Mobile">
 
 </div>
 
 <div class="menu-title">Menu</div>
 
-<div class="menu-item">
-<div>
-<div class="item-name">🍔 Veg Burger</div>
-<div class="price">₹120</div>
-</div>
-<button class="add-btn" onclick="addItem('Veg Burger',120)">Add</button>
-</div>
+<!-- 10 Products -->
 
-<div class="menu-item">
-<div>
-<div class="item-name">🍕 Pizza</div>
-<div class="price">₹250</div>
-</div>
-<button class="add-btn" onclick="addItem('Pizza',250)">Add</button>
-</div>
+<div class="menu-item"><div>Burger <div class="price">₹120</div></div><button class="add-btn" onclick="addItem('Burger',120)">Add</button></div>
 
-<div class="menu-item">
-<div>
-<div class="item-name">🥤 Cold Coffee</div>
-<div class="price">₹80</div>
-</div>
-<button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button>
-</div>
+<div class="menu-item"><div>Pizza <div class="price">₹250</div></div><button class="add-btn" onclick="addItem('Pizza',250)">Add</button></div>
+
+<div class="menu-item"><div>Cold Coffee <div class="price">₹80</div></div><button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button></div>
+
+<div class="menu-item"><div>Sandwich <div class="price">₹90</div></div><button class="add-btn" onclick="addItem('Sandwich',90)">Add</button></div>
+
+<div class="menu-item"><div>Pasta <div class="price">₹180</div></div><button class="add-btn" onclick="addItem('Pasta',180)">Add</button></div>
+
+<div class="menu-item"><div>French Fries <div class="price">₹100</div></div><button class="add-btn" onclick="addItem('Fries',100)">Add</button></div>
+
+<div class="menu-item"><div>Noodles <div class="price">₹150</div></div><button class="add-btn" onclick="addItem('Noodles',150)">Add</button></div>
+
+<div class="menu-item"><div>Paneer Roll <div class="price">₹140</div></div><button class="add-btn" onclick="addItem('Paneer Roll',140)">Add</button></div>
+
+<div class="menu-item"><div>Ice Cream <div class="price">₹70</div></div><button class="add-btn" onclick="addItem('Ice Cream',70)">Add</button></div>
+
+<div class="menu-item"><div>Mojito <div class="price">₹110</div></div><button class="add-btn" onclick="addItem('Mojito',110)">Add</button></div>
 
 <div class="cart">
 <h3 id="cart">Cart Empty</h3>
-
 <button class="order-btn" onclick="sendOrder()">Place Order</button>
+</div>
+
+</div>
+
+<!-- Footer Offer -->
+
+<div class="footer-offer">
+<div>🔥 One Time Offer - 20% OFF</div>
+<button class="register-btn" onclick="openPopup()">Register</button>
+</div>
+
+<!-- Popup Form -->
+
+<div class="popup" id="popup">
+
+<div class="popup-content">
+
+<h3>Register</h3>
+
+<input type="text" placeholder="Name">
+<input type="text" placeholder="Mobile">
+
+<button class="order-btn" onclick="register()">Submit</button>
+<button class="close-btn" onclick="closePopup()">Close</button>
 
 </div>
 
@@ -206,6 +264,24 @@ msg+="Items: "+cart.join(", ");
 let url="https://wa.me/919999999999?text="+msg;
 
 window.open(url);
+
+}
+
+/* Popup */
+
+function openPopup(){
+document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function register(){
+
+alert("Registration Successful!");
+
+closePopup();
 
 }
 
