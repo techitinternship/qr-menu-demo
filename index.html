@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant QR Menu</title>
+
+<title>QR Menu</title>
 
 <style>
 
@@ -11,37 +12,43 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family: 'Segoe UI', sans-serif;
 }
 
 body{
-background:#f5f6fa;
+background:#f4f6f9;
 }
+
+/* Header */
 
 .header{
 background:#ff5a3c;
 color:white;
-padding:20px;
+padding:18px;
 text-align:center;
-font-size:22px;
-font-weight:bold;
+font-size:20px;
+font-weight:600;
 }
+
+/* Container */
 
 .container{
 max-width:500px;
 margin:auto;
-padding:20px;
+padding:15px;
 }
 
-.login{
+/* Customer info */
+
+.customer-box{
 background:white;
 padding:15px;
 border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
 margin-bottom:20px;
 }
 
-.login input{
+.customer-box input{
 width:100%;
 padding:10px;
 margin-top:10px;
@@ -49,11 +56,15 @@ border:1px solid #ddd;
 border-radius:6px;
 }
 
+/* Menu title */
+
 .menu-title{
-margin:15px 0;
-font-size:20px;
-font-weight:bold;
+font-size:18px;
+font-weight:600;
+margin-bottom:10px;
 }
+
+/* Menu items */
 
 .menu-item{
 display:flex;
@@ -63,10 +74,10 @@ background:white;
 padding:15px;
 margin-bottom:10px;
 border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.08);
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-.item-info{
+.item-name{
 font-size:16px;
 }
 
@@ -75,12 +86,14 @@ color:#777;
 font-size:14px;
 }
 
+/* Buttons */
+
 .add-btn{
 background:#ff5a3c;
 color:white;
 border:none;
-padding:8px 14px;
-border-radius:6px;
+padding:7px 14px;
+border-radius:5px;
 cursor:pointer;
 }
 
@@ -88,12 +101,14 @@ cursor:pointer;
 background:#e64a2e;
 }
 
+/* Cart */
+
 .cart{
-background:white;
 margin-top:20px;
+background:white;
 padding:15px;
 border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
 .order-btn{
@@ -124,32 +139,34 @@ background:#219150;
 
 <div class="container">
 
-<div class="login">
-<input type="text" id="name" placeholder="Enter your name">
-<input type="text" id="mobile" placeholder="Enter mobile number">
+<div class="customer-box">
+
+<input type="text" id="name" placeholder="Enter Your Name">
+<input type="text" id="mobile" placeholder="Enter Mobile Number">
+
 </div>
 
 <div class="menu-title">Menu</div>
 
 <div class="menu-item">
-<div class="item-info">
-🍔 Veg Burger
+<div>
+<div class="item-name">🍔 Veg Burger</div>
 <div class="price">₹120</div>
 </div>
 <button class="add-btn" onclick="addItem('Veg Burger',120)">Add</button>
 </div>
 
 <div class="menu-item">
-<div class="item-info">
-🍕 Pizza
+<div>
+<div class="item-name">🍕 Pizza</div>
 <div class="price">₹250</div>
 </div>
 <button class="add-btn" onclick="addItem('Pizza',250)">Add</button>
 </div>
 
 <div class="menu-item">
-<div class="item-info">
-🥤 Cold Coffee
+<div>
+<div class="item-name">🥤 Cold Coffee</div>
 <div class="price">₹80</div>
 </div>
 <button class="add-btn" onclick="addItem('Cold Coffee',80)">Add</button>
@@ -157,7 +174,9 @@ background:#219150;
 
 <div class="cart">
 <h3 id="cart">Cart Empty</h3>
+
 <button class="order-btn" onclick="sendOrder()">Place Order</button>
+
 </div>
 
 </div>
